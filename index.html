@@ -3,57 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KEOGOD.SITE | Đỉnh Cao Soi Kèo</title>
+    <title>KEOGOD.SITE | Sảnh Cá Cược Đẳng Cấp</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: linear-gradient(-45deg, #0d1117, #161b22, #0d1117);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: #ffffff; margin: 0; display: flex; flex-direction: column; align-items: center;
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .header { 
-            width: 100%; padding: 50px 0; background: rgba(22, 27, 34, 0.8);
-            border-bottom: 3px solid #2ea043; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .match-card { 
-            background: #1c2128; border: 1px solid #444c56; border-radius: 15px; 
-            padding: 25px; margin-bottom: 25px; transition: all 0.3s ease; width: 90%; max-width: 500px;
-        }
-        .match-card:hover { 
-            transform: translateY(-10px); border-color: #2ea043; box-shadow: 0 10px 30px rgba(46, 160, 67, 0.2);
-        }
-        .btn-join {
-            display: inline-block; margin-top: 20px; padding: 15px 40px; background: #2ea043;
-            color: white; text-decoration: none; border-radius: 50px; font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 160, 67, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(46, 160, 67, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 160, 67, 0); }
-        }
+        :root { --gold: #ffcc00; --bg-dark: #0b0e11; --card-bg: #1c2128; --text-gray: #8b949e; --blue-bet: #007bff; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-dark); color: white; margin: 0; }
+        
+        /* Navbar */
+        .navbar { display: flex; justify-content: center; gap: 30px; padding: 15px; background: #000; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; }
+        .navbar a { color: #ccc; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .navbar a:hover { color: var(--gold); }
+
+        /* Chữ chạy */
+        .marquee { background: var(--gold); color: black; padding: 8px; font-weight: bold; font-size: 14px; }
+
+        /* Login & Banner Area */
+        .hero-container { display: flex; flex-wrap: wrap; max-width: 1200px; margin: 20px auto; background: white; border-radius: 15px; overflow: hidden; color: #333; }
+        .hero-banner { flex: 1.2; min-width: 350px; background: url('https://img.freepik.com/free-photo/soccer-players-action-professional-stadium_1150-14450.jpg') center/cover; position: relative; min-height: 450px; }
+        .hero-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, transparent, white); }
+        
+        .login-section { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .login-section h2 { font-size: 35px; margin: 0 0 10px 0; color: #b8860b; }
+        .tab-box { display: flex; gap: 10px; margin-bottom: 25px; }
+        .tab { padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .tab.active { background: #333; color: white; border-color: #333; }
+        
+        input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; background: #fdfdfd; }
+        .btn-main { width: 100%; padding: 15px; background: #8e9196; color: white; border: none; border-radius: 50px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { background: #333; transform: scale(1.02); }
+
+        /* Sảnh Thể Thao (Bảng kèo) */
+        .sports-lobby { max-width: 1200px; margin: 40px auto; padding: 0 15px; }
+        .section-title { color: var(--gold); border-left: 5px solid var(--gold); padding-left: 15px; margin-bottom: 20px; }
+        
+        .bet-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 10px; overflow: hidden; font-size: 13px; }
+        .bet-table th { background: #2d333b; padding: 15px; text-align: left; color: var(--text-gray); }
+        .bet-table td { padding: 15px; border-bottom: 1px solid #333; }
+        
+        .team-name { font-weight: bold; display: block; margin-bottom: 5px; }
+        .live-status { color: #ff3e3e; font-size: 11px; font-weight: bold; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .odds-box { display: flex; flex-direction: column; gap: 5px; }
+        .odds-item { background: #0d1117; padding: 8px; border-radius: 4px; text-align: center; border: 1px solid #444; cursor: pointer; }
+        .odds-item:hover { border-color: var(--gold); color: var(--gold); }
+        .odds-val { color: #ffcc00; font-weight: bold; }
+
+        @media (max-width: 768px) { .hero-container { flex-direction: column; } .bet-table { display: block; overflow-x: auto; } }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>KEOGOD.SITE</h1>
-        <p>Dự đoán chính xác - Về bờ an toàn</p>
+
+    <div class="navbar">
+        <a href="#">TRANG CHỦ</a>
+        <a href="#">KHUYẾN MÃI</a>
+        <a href="#">THỂ THAO</a>
+        <a href="#">CASINO</a>
+        <a href="#">XỔ SỐ</a>
+        <a href="#">TÀI KHOẢN</a>
     </div>
-    <div class="match-card" style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between;">
-            <span>MU vs Liverpool</span>
-            <span style="color: #ff3e3e; animation: blink 1s infinite;">LIVE</span>
+
+    <div class="marquee">
+        <marquee>🔥 CHÀO MỪNG ĐẾN VỚI KEOGOD.SITE - ĐĂNG KÝ NGAY NHẬN THƯỞNG NẠP ĐẦU 100% - HOÀN TRẢ KHÔNG GIỚI HẠN 1.5% MỖI NGÀY 🔥</marquee>
+    </div>
+
+    <div class="hero-container">
+        <div class="hero-banner"></div>
+        <div class="login-section">
+            <h2>Xin chào !</h2>
+            <p style="color: #666; margin-bottom: 25px;">Vui lòng điền thông tin để tham gia sảnh cược</p>
+            
+            <div class="tab-box">
+                <div class="tab">Đăng nhập số điện thoại</div>
+                <div class="tab active">Đăng ký tài khoản</div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Hệ thống đang đồng bộ dữ liệu người dùng, vui lòng thử lại sau!');">
+                <input type="text" placeholder="Tên đăng nhập (6-16 ký tự)" required>
+                <input type="password" placeholder="Mật khẩu (8-20 ký tự)" required>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" style="color: #b8860b; text-decoration: none; font-size: 13px;">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn-main">ĐĂNG KÝ NGAY →</button>
+            </form>
         </div>
-        <p style="color: #3fb950; background: rgba(46, 160, 67, 0.1); padding: 10px; border-radius: 5px; margin-top: 15px;">
-            Dự đoán: Tài 2.5
-        </p>
     </div>
-    <a href="https://zalo.me/your-link" class="btn-join">VÀO NHÓM LẤY KÈO VIP</a>
+
+    <div class="sports-lobby">
+        <h2 class="section-title">TRỰC TIẾP BÓNG ĐÁ</h2>
+        <table class="bet-table">
+            <thead>
+                <tr>
+                    <th>TRẬN ĐẤU</th>
+                    <th>CƯỢC CHẤP (HDP)</th>
+                    <th>TÀI XỈU (O/U)</th>
+                    <th>1X2 (CHÂU ÂU)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="live-status">H2 65'</span><br>
+                        <span class="team-name">Manchester United</span>
+                        <span class="team-name">Liverpool</span>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">0/0.5 <span class="odds-val">0.98</span></div>
+                            <div class="odds-item">-0/0.5 <span class="odds-val">0.85</span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">Tài 2.5 <span class="odds-val">0.92</span></div>
+                            <div class="odds-item">Xỉu 2.5 <span class="odds-val">0.88</span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">1 <span class="odds-val">2.15</span></div>
+                            <div class="odds-item">2 <span class="odds-val">3.40</span></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: var(--text-gray);">21:00 Hôm nay</span><br>
+                        <span class="team-name">Real Madrid</span>
+                        <span class="team-name">Barcelona</span>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">0.5 <span class="odds-val">0.90</span></div>
+                            <div class="odds-item">-0.5 <span class="odds-val">0.94</span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">Tài 3.0 <span class="odds-val">0.81</span></div>
+                            <div class="odds-item">Xỉu 3.0 <span class="odds-val">1.03</span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="odds-box">
+                            <div class="odds-item">1 <span class="odds-val">1.95</span></div>
+                            <div class="odds-item">2 <span class="odds-val">4.20</span></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align: center; padding: 50px; color: #444; font-size: 12px; border-top: 1px solid #222;">
+        <p>© 2026 KEOGOD.SITE | ĐỐI TÁC ỦY QUYỀN CHÍNH THỨC</p>
+    </div>
+
 </body>
 </html>
