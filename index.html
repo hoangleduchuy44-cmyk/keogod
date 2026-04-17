@@ -1,26 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tài Xỉu VIP</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: #020617;
+  color: white;
+}
+
+h1 {
+  color: #22c55e;
+}
+
+/* xúc xắc */
+.dice {
+  font-size: 50px;
+  margin: 20px;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {transform: rotate(0);}
+  50% {transform: rotate(20deg);}
+  100% {transform: rotate(0);}
+}
+
+/* kết quả */
+.result {
+  font-size: 22px;
+  margin: 10px;
+}
+
+/* lịch sử */
+.history {
+  margin-top: 20px;
+}
+
+.circle {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  margin: 3px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tai { background: green; }
+.xiu { background: red; }
+
+</style>
+</head>
+
+<body>
+
+<h1>🎲 TÀI XỈU VIP 🎲</h1>
+
+<div class="dice" id="dice">🎲 🎲 🎲</div>
+
+<div class="result" id="result">Đang chờ...</div>
+
+<div class="history" id="history"></div>
+
 <script>
+let history = [];
+
 function rollDice() {
   return Math.floor(Math.random() * 6) + 1;
 }
 
-function autoPlay() {
+function play() {
   let d1 = rollDice();
   let d2 = rollDice();
   let d3 = rollDice();
 
   let sum = d1 + d2 + d3;
-  let result = sum >= 11 ? "TÀI 🔥" : "XỈU ❄️";
+  let result = sum >= 11 ? "T" : "X";
 
   document.getElementById("dice").innerHTML =
     d1 + " - " + d2 + " - " + d3;
 
   document.getElementById("result").innerHTML =
-    "Kết quả: " + result;
+    "Kết quả: " + (result === "T" ? "TÀI 🔥" : "XỈU ❄️");
+
+  history.unshift(result);
+  if (history.length > 20) history.pop();
+
+  renderHistory();
 }
 
-// chạy mỗi 3 giây
-setInterval(autoPlay, 3000);
+function renderHistory() {
+  let html = "";
+  history.forEach(h => {
+    html += `<div class="circle ${h === "T" ? "tai" : "xiu"}">${h}</div>`;
+  });
+  document.getElementById("history").innerHTML = html;
+}
 
-// chạy lần đầu luôn
-autoPlay();
+setInterval(play, 3000);
+play();
 </script>
+
+</body>
+</html>
