@@ -17,22 +17,22 @@ h1 {
   color: #22c55e;
 }
 
+/* timer */
+.timer {
+  font-size: 40px;
+  margin: 20px;
+  color: yellow;
+}
+
 /* xúc xắc */
 .dice {
   font-size: 50px;
   margin: 20px;
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0% {transform: rotate(0);}
-  50% {transform: rotate(20deg);}
-  100% {transform: rotate(0);}
 }
 
 /* kết quả */
 .result {
-  font-size: 22px;
+  font-size: 24px;
   margin: 10px;
 }
 
@@ -48,7 +48,6 @@ h1 {
   line-height: 30px;
   border-radius: 50%;
   margin: 3px;
-  font-size: 14px;
   font-weight: bold;
 }
 
@@ -62,37 +61,54 @@ h1 {
 
 <h1>🎲 TÀI XỈU VIP 🎲</h1>
 
+<div class="timer" id="timer">60</div>
+
 <div class="dice" id="dice">🎲 🎲 🎲</div>
 
-<div class="result" id="result">Đang chờ...</div>
+<div class="result" id="result">Đang chờ mở bát...</div>
 
 <div class="history" id="history"></div>
 
 <script>
+let time = 60;
 let history = [];
 
 function rollDice() {
   return Math.floor(Math.random() * 6) + 1;
 }
 
-function play() {
-  let d1 = rollDice();
-  let d2 = rollDice();
-  let d3 = rollDice();
+function gameLoop() {
+  time--;
 
-  let sum = d1 + d2 + d3;
-  let result = sum >= 11 ? "T" : "X";
+  document.getElementById("timer").innerHTML = time + "s";
 
-  document.getElementById("dice").innerHTML =
-    d1 + " - " + d2 + " - " + d3;
+  // 5 giây cuối
+  if (time <= 5) {
+    document.getElementById("result").innerHTML = "⏳ Sắp mở bát...";
+  }
 
-  document.getElementById("result").innerHTML =
-    "Kết quả: " + (result === "T" ? "TÀI 🔥" : "XỈU ❄️");
+  // hết giờ → mở bát
+  if (time === 0) {
+    let d1 = rollDice();
+    let d2 = rollDice();
+    let d3 = rollDice();
 
-  history.unshift(result);
-  if (history.length > 20) history.pop();
+    let sum = d1 + d2 + d3;
+    let result = sum >= 11 ? "T" : "X";
 
-  renderHistory();
+    document.getElementById("dice").innerHTML =
+      d1 + " - " + d2 + " - " + d3;
+
+    document.getElementById("result").innerHTML =
+      "🎯 Kết quả: " + (result === "T" ? "TÀI 🔥" : "XỈU ❄️");
+
+    history.unshift(result);
+    if (history.length > 20) history.pop();
+
+    renderHistory();
+
+    time = 60; // reset lại
+  }
 }
 
 function renderHistory() {
@@ -103,8 +119,7 @@ function renderHistory() {
   document.getElementById("history").innerHTML = html;
 }
 
-setInterval(play, 3000);
-play();
+setInterval(gameLoop, 1000);
 </script>
 
 </body>
