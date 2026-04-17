@@ -1,126 +1,190 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Tài Xỉu VIP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao Diện Tài Xỉu - DUC HUY</title>
+    <style>
+        /* PHẦN 1: GIAO DIỆN (CSS) */
+        body {
+            background-color: #0f0a05;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  text-align: center;
-  background: #020617;
-  color: white;
-}
+        .game-container {
+            display: flex;
+            background: linear-gradient(145deg, #5c3a1e, #2a180d);
+            padding: 30px;
+            border-radius: 60px;
+            border: 5px solid #d4af37; /* Màu vàng đồng */
+            box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.3);
+            color: #fff;
+            align-items: center;
+            position: relative;
+        }
 
-h1 {
-  color: #22c55e;
-}
+        .bet-box {
+            text-align: center;
+            padding: 20px;
+            width: 220px;
+        }
 
-/* timer */
-.timer {
-  font-size: 40px;
-  margin: 20px;
-  color: yellow;
-}
+        .bet-box h2 {
+            font-size: 60px;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0 0 10px #000, 2px 2px 0px #b38b4d;
+            letter-spacing: 5px;
+        }
 
-/* xúc xắc */
-.dice {
-  font-size: 50px;
-  margin: 20px;
-}
+        .total-bet {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 18px;
+            color: #ff6666;
+            margin: 15px 0;
+            font-weight: bold;
+            border: 1px solid #444;
+        }
 
-/* kết quả */
-.result {
-  font-size: 24px;
-  margin: 10px;
-}
+        input[type="number"] {
+            width: 80%;
+            padding: 8px;
+            border-radius: 10px;
+            border: none;
+            background: #1a1a1a;
+            color: gold;
+            text-align: center;
+            outline: none;
+        }
 
-/* lịch sử */
-.history {
-  margin-top: 20px;
-}
+        /* Khu vực xúc xắc ở giữa */
+        .dice-section {
+            text-align: center;
+            background: radial-gradient(circle, #333, #000);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px #000;
+        }
 
-.circle {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 50%;
-  margin: 3px;
-  font-weight: bold;
-}
+        .timer {
+            font-size: 24px;
+            color: #ffcc00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.tai { background: green; }
-.xiu { background: red; }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
 
-</style>
+        .dice {
+            width: 40px;
+            height: 40px;
+            background: #e63946;
+            border-radius: 8px;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 20px;
+            color: white;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .btn-bet {
+            background: linear-gradient(#ffd700, #b38b4d);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+            text-transform: uppercase;
+            box-shadow: 0 4px 0 #664d00;
+            transition: 0.1s;
+        }
+
+        .btn-bet:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #664d00;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>🎲 TÀI XỈU VIP 🎲</h1>
+    <div class="game-container">
+        <div class="bet-box">
+            <h2>TÀI</h2>
+            <div class="total-bet">741,648,460</div>
+            <input type="number" placeholder="Cược Tài...">
+        </div>
 
-<div class="timer" id="timer">60</div>
+        <div class="dice-section">
+            <div class="timer" id="timer">60</div>
+            <div class="dice-container">
+                <div class="dice" id="d1">?</div>
+                <div class="dice" id="d2">?</div>
+                <div class="dice" id="d3">?</div>
+            </div>
+            <button class="btn-bet" onclick="lacXucXac()">ĐẶT CƯỢC</button>
+        </div>
 
-<div class="dice" id="dice">🎲 🎲 🎲</div>
+        <div class="bet-box">
+            <h2>XỈU</h2>
+            <div class="total-bet">741,648,460</div>
+            <input type="number" placeholder="Cược Xỉu...">
+        </div>
+    </div>
 
-<div class="result" id="result">Đang chờ mở bát...</div>
+    <script>
+        function lacXucXac() {
+            // Hiệu ứng lắc xúc xắc giả lập
+            let count = 0;
+            let interval = setInterval(() => {
+                document.getElementById('d1').innerText = Math.floor(Math.random() * 6) + 1;
+                document.getElementById('d2').innerText = Math.floor(Math.random() * 6) + 1;
+                document.getElementById('d3').innerText = Math.floor(Math.random() * 6) + 1;
+                count++;
+                if(count > 10) {
+                    clearInterval(interval);
+                    tinhKetQua();
+                }
+            }, 50);
+        }
 
-<div class="history" id="history"></div>
+        function tinhKetQua() {
+            let d1 = parseInt(document.getElementById('d1').innerText);
+            let d2 = parseInt(document.getElementById('d2').innerText);
+            let d3 = parseInt(document.getElementById('d3').innerText);
+            let tong = d1 + d2 + d3;
+            
+            let ketQua = (tong >= 11) ? "TÀI" : "XỈU";
+            alert("Kết quả: " + tong + " điểm - " + ketQua);
+        }
 
-<script>
-let time = 60;
-let history = [];
-
-function rollDice() {
-  return Math.floor(Math.random() * 6) + 1;
-}
-
-function gameLoop() {
-  time--;
-
-  document.getElementById("timer").innerHTML = time + "s";
-
-  // 5 giây cuối
-  if (time <= 5) {
-    document.getElementById("result").innerHTML = "⏳ Sắp mở bát...";
-  }
-
-  // hết giờ → mở bát
-  if (time === 0) {
-    let d1 = rollDice();
-    let d2 = rollDice();
-    let d3 = rollDice();
-
-    let sum = d1 + d2 + d3;
-    let result = sum >= 11 ? "T" : "X";
-
-    document.getElementById("dice").innerHTML =
-      d1 + " - " + d2 + " - " + d3;
-
-    document.getElementById("result").innerHTML =
-      "🎯 Kết quả: " + (result === "T" ? "TÀI 🔥" : "XỈU ❄️");
-
-    history.unshift(result);
-    if (history.length > 20) history.pop();
-
-    renderHistory();
-
-    time = 60; // reset lại
-  }
-}
-
-function renderHistory() {
-  let html = "";
-  history.forEach(h => {
-    html += `<div class="circle ${h === "T" ? "tai" : "xiu"}">${h}</div>`;
-  });
-  document.getElementById("history").innerHTML = html;
-}
-
-setInterval(gameLoop, 1000);
-</script>
+        // Đếm ngược đơn giản
+        let giay = 60;
+        setInterval(() => {
+            giay--;
+            if(giay < 0) giay = 60;
+            document.getElementById('timer').innerText = giay;
+        }, 1000);
+    </script>
 
 </body>
 </html>
