@@ -1,78 +1,26 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>KEOGOD</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
+<script>
+function rollDice() {
+  return Math.floor(Math.random() * 6) + 1;
 }
 
-.header {
-  background: #1e293b;
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
-  color: #22c55e;
+function autoPlay() {
+  let d1 = rollDice();
+  let d2 = rollDice();
+  let d3 = rollDice();
+
+  let sum = d1 + d2 + d3;
+  let result = sum >= 11 ? "TÀI 🔥" : "XỈU ❄️";
+
+  document.getElementById("dice").innerHTML =
+    d1 + " - " + d2 + " - " + d3;
+
+  document.getElementById("result").innerHTML =
+    "Kết quả: " + result;
 }
 
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-}
+// chạy mỗi 3 giây
+setInterval(autoPlay, 3000);
 
-.post {
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.post h2 {
-  margin: 0;
-  color: #22c55e;
-}
-
-.time {
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-.tag {
-  background: #22c55e;
-  color: black;
-  padding: 5px 10px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: 10px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="header">🔥 KEOGOD - Soi kèo</div>
-
-<div class="container">
-
-  <!-- COPY ĐOẠN NÀY ĐỂ ĐĂNG BÀI -->
-  <div class="post">
-    <h2>MU vs Liverpool</h2>
-    <div class="time">20:00 hôm nay</div>
-    <p>
-      👉 Kèo: Tài 2.5 <br>
-      👉 Tỷ lệ: 78% <br>
-      👉 Nhận định: Trận này dễ nổ tài
-    </p>
-    <div class="tag">KÈO NGON 🔥</div>
-  </div>
-
-</div>
-
-</body>
-</html>
+// chạy lần đầu luôn
+autoPlay();
+</script>
