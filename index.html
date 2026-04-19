@@ -9,18 +9,20 @@ body {
     margin: 0;
     background: #111;
     overflow: hidden;
+    font-family: Arial;
 }
 
 /* chữ chạy ngang */
 .marquee {
     position: absolute;
+    top: 30%;
     white-space: nowrap;
     font-size: 40px;
     font-weight: bold;
     animation: runText 10s linear infinite, colorChange 2s infinite;
 }
 
-/* animation chạy từ trái qua phải */
+/* chạy ngang */
 @keyframes runText {
     0% { left: -100%; }
     100% { left: 100%; }
@@ -34,14 +36,43 @@ body {
     75% { color: cyan; }
     100% { color: red; }
 }
+
+/* nút telegram */
+.telegram-btn {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #0088cc, #00c6ff);
+    color: white;
+    padding: 20px 40px;
+    font-size: 22px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 20px #00c6ff;
+    transition: 0.3s;
+}
+
+/* hover */
+.telegram-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 40px #00c6ff;
+}
 </style>
 </head>
 
 <body>
 
+<!-- chữ chạy -->
 <div class="marquee">
-    🚧 WEBSITE ĐANG HOÀN THIỆN - VUI LÒNG QUAY LẠI SAU 🚧
+🚧 WEBSITE ĐANG HOÀN THIỆN - VUI LÒNG QUAY LẠI SAU 🚧
 </div>
+
+<!-- thay link telegram -->
+<a href="https://t.me/KGKeogot" class="telegram-btn" target="_blank">
+👉 THAM GIA TELEGRAM NGAY
+</a>
 
 </body>
 </html>
