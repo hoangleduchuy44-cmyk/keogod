@@ -1,78 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Coming Soon</title>
-
-<style>
-body {
-    margin: 0;
-    background: #111;
-    overflow: hidden;
-    font-family: Arial;
-}
-
-/* chữ chạy ngang */
-.marquee {
-    position: absolute;
-    top: 30%;
-    white-space: nowrap;
-    font-size: 40px;
-    font-weight: bold;
-    animation: runText 10s linear infinite, colorChange 2s infinite;
-}
-
-/* chạy ngang */
-@keyframes runText {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-/* đổi màu liên tục */
-@keyframes colorChange {
-    0% { color: red; }
-    25% { color: yellow; }
-    50% { color: lime; }
-    75% { color: cyan; }
-    100% { color: red; }
-}
-
-/* nút telegram */
-.telegram-btn {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(45deg, #0088cc, #00c6ff);
-    color: white;
-    padding: 20px 40px;
-    font-size: 22px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 20px #00c6ff;
-    transition: 0.3s;
-}
-
-/* hover */
-.telegram-btn:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 40px #00c6ff;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bóng Đá Thắng Thua - Kỷ Nguyên Phân Tích</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- chữ chạy -->
-<div class="marquee">
-🚧 WEBSITE ĐANG HOÀN THIỆN - VUI LÒNG QUAY LẠI SAU 🚧
-</div>
+    <header>
+        <div class="container navbar">
+            <div class="logo">D U C H U Y</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#matches">Trận đấu</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<!-- thay link telegram -->
-<a href="https://t.me/KGKeogot" class="telegram-btn" target="_blank">
-👉 THAM GIA TELEGRAM NGAY
-</a>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Kỷ Nguyên Phân Tích Bóng Đá</h1>
+            <p class="tagline">Tỉ lệ thắng chuẩn xác từng giây</p>
+            <a href="#matches" class="cta-btn">Bắt Đầu Ngay</a>
+        </div>
+    </section>
+
+    <section id="matches" class="container matches">
+        <h2 style="text-align: center; font-size: 2.5rem; text-transform: uppercase;">Các Trận Đấu Đỉnh Cao</h2>
+        <div class="match-grid">
+            <div class="match-card">
+                <h3>Copa del Rey: Barca vs Atletico</h3>
+                <p>Phân tích tỉ lệ thắng dựa trên dữ liệu kỹ thuật và phong độ mới nhất.</p>
+                <a href="#" class="view-btn">Xem chi tiết</a>
+            </div>
+            <div class="match-card">
+                <h3>Arsenal vs Man City</h3>
+                <p>Tỉ lệ thắng chuẩn xác được cập nhật từ chuyên gia.</p>
+                <a href="#" class="view-btn">Xem chi tiết</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><b>keogod.site | Việt Nam</b></p>
+            <p>&copy; 2026 Bóng Đá Thắng Thua. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
