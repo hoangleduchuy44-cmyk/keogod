@@ -1,0 +1,71 @@
+:root {
+    --gold: #FFD700;
+    --dark: #111;
+    --dark-light: #222;
+    --white: #fff;
+    --red-hot: #ff4d4d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', sans-serif; background: #000; color: #ddd; line-height: 1.5; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 10px; }
+
+/* Logo KEOGOD */
+.logo-text { 
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px; 
+    font-weight: 700; 
+    color: var(--white); 
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+.logo-text span { color: var(--gold); }
+
+/* Header & Nav */
+.header { background: var(--dark); border-bottom: 2px solid var(--gold); }
+.flex-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+.ads-box { color: var(--gold); border: 1px dashed var(--gold); padding: 20px; font-weight: bold; }
+
+.nav-bar { background: var(--dark-light); border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 999; }
+.main-menu { list-style: none; display: flex; }
+.main-menu li a { color: var(--white); text-decoration: none; padding: 15px 20px; display: block; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+.main-menu li a:hover, .main-menu li a.active { color: var(--gold); background: #000; }
+
+/* Layout Grid */
+.layout-grid { display: grid; grid-template-columns: 240px 1fr 280px; gap: 20px; margin-top: 20px; }
+
+/* Cột Trái */
+.title-box { background: var(--gold); color: #000; padding: 12px; font-size: 15px; font-weight: bold; }
+.list-leagues { list-style: none; background: var(--dark-light); border: 1px solid #333; }
+.list-leagues li a { display: block; padding: 10px 15px; border-bottom: 1px solid #333; text-decoration: none; color: #ccc; font-size: 13px; }
+.list-leagues li a:hover { color: var(--gold); padding-left: 20px; transition: 0.3s; background: #000; }
+
+/* Cột Giữa */
+.content-center { background: var(--dark-light); padding: 20px; border: 1px solid #333; }
+.breadcrumb { font-size: 12px; color: #777; margin-bottom: 15px; }
+.page-title { font-size: 24px; color: var(--gold); border-left: 5px solid var(--gold); padding-left: 15px; margin-bottom: 25px; text-transform: uppercase; }
+
+.item-news { display: flex; gap: 20px; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+.img-news img { width: 220px; border: 2px solid var(--gold); display: block; }
+.info-news h2 { font-size: 19px; margin-bottom: 10px; }
+.info-news h2 a { text-decoration: none; color: var(--white); transition: 0.3s; }
+.info-news h2 a:hover { color: var(--gold); }
+.info-news p { font-size: 14px; color: #aaa; margin-bottom: 10px; }
+.date-news { font-size: 12px; color: var(--gold); }
+
+/* Cột Phải */
+.title-right { background: var(--red-hot); color: #fff; padding: 12px; font-size: 15px; font-weight: bold; text-align: center; }
+.box-right { background: var(--dark-light); border: 1px solid #333; margin-bottom: 20px; }
+.odd-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #333; font-size: 13px; }
+.rate { color: var(--red-hot); font-weight: bold; font-size: 15px; }
+
+/* Footer */
+.footer { background: var(--dark); border-top: 3px solid var(--gold); color: #888; text-align: center; padding: 40px 0; margin-top: 50px; }
+.footer-logo { font-family: 'Oswald', sans-serif; font-size: 30px; margin-bottom: 10px; font-weight: bold; }
+.footer-logo span { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .layout-grid { grid-template-columns: 1fr; }
+    .sidebar-left, .sidebar-right { display: none; }
+}
